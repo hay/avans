@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        svg rect {
+            fill : blue;
+            stroke : white;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script src="lib/d3.js"></script>
+    <script>
+        function makeData() {
+            var data = [];
+
+            for (var i = 0; i < 10; i++) {
+                data.push(Math.random());
+            }
+
+            return data;
+        }
+
+        var w = 500, h = 250;
+
+        var chart = d3.select("body").append("svg:svg").attr({
+            width : w,
+            height : h
+        });
+
+        var data = makeData();
+
+        chart.selectAll("rect").data(data).enter().append("svg:rect").attr({
+            x : function(d, i) { return i * (w / data.length); },
+            y : function(d) { return h - d * h; },
+            width : (w / data.length),
+            height : function(d) { return d * h; }
+        });
+
+        function redraw() {
+            chart.selectAll("rect").data(makeData()).transition().duration(1000).attr({
+                y : function(d) { return h - d * h; },
+                height : function(d) { return d * h; }
+            });
+        }
+
+        function anim() {
+            setTimeout(function() {
+                redraw();
+                anim();
+            }, 1000);
+        }
+
+        anim();
+    </script>
+</body>
+</html>

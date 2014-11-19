@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, .bubble {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bubble {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble"></div>
+    <script src="lib/d3.js"></script>
+    <script>
+        function Bubbles(el, opts) {
+            opts = opts || {
+                padding : 40
+            };
+
+            if (typeof el === 'string') {
+                el = document.querySelector(el);
+            }
+
+            var elStyle = window.getComputedStyle(el);
+            var elWidth = parseInt(elStyle.width);
+            var elHeight = parseInt(elStyle.height);
+
+            var diameter;
+
+            if (elWidth < elHeight) {
+                diameter = elWidth;
+            } else {
+                diameter = elHeight;
+            }
+
+            diameter = diameter - opts.padding;
+
+            d3.select(el).append('svg').attr({
+                width : diameter,
+                height: diameter
+            });
+
+            var color = d3.scale.category20c();
+
+            var bubble = d3.layout.pack()
+                .sort(null)
+                .size([diameter, diameter])
+                .padding(1.5);
+
+            var nodes = [];
+
+
+            var svg = d3.select('svg');
+
+            function setNode(node) {
+                return node.attr({
+                  'r' : function(d) { return d.r; },
+                  'cx' : function(d) { return d.x; },
+                  'cy' : function(d) { return d.y; },
+                  'fill' : function(d) { return color(d.r) }
+                });
+            }
+
+            function draw() {
+                var drawing = svg.selectAll("circle").data(
+                    bubble.nodes({
+                        children : nodes
+                    })
+                );
+
+                setNode( drawing.transition() );
+                setNode( drawing.enter().append('circle') );
+            }
+
+            function addNode() {
+                nodes.push({
+                    value : Math.random() * 300
+                });
+
+                draw();
+            }
+
+            svg.on('click', function() {
+                addNode();
+            });
+
+            addNode();
+        }
+
+        var bubbles = new Bubbles(".bubble");
+    </script>
+</body>
+</html>
