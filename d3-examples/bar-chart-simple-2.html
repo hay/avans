@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #chart div {
+            height: 50px;
+            background: red;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script src="lib/d3.js"></script>
+    <script>
+        var data = [4, 2, 10, 5, 1, 7];
+
+        var scale = d3.scale.linear()
+            .domain([0, d3.max(data)])
+            .range([0, window.innerWidth])
+
+
+        d3.select('#chart')
+          .selectAll('div')
+          .data(data)
+          .enter()
+          .append('div')
+          .style('width', function(d) {
+            return scale(d) + 'px';
+          });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+  <button>Groter jonguh</button>
+
+  <svg width="500px" height="500px">
+<rect x="54.81" y="67.738" fill="#9FDCF5" stroke="#FFFFFF" stroke-miterlimit="10" width="105.357" height="127.381"/>
+<rect x="204.81" y="145.714" transform="matrix(0.7345 -0.6786 0.6786 0.7345 -96.3167 238.6831)" fill="#5A1852" stroke="#FFFFFF" stroke-miterlimit="10" width="104.167" height="193.452"/>
+<rect x="250" y="62.976" transform="matrix(0.7905 0.6124 -0.6124 0.7905 157.7556 -178.1475)" fill="#ED2224" stroke="#FFFFFF" stroke-miterlimit="10" width="178.619" height="157.143"/>
+<rect x="79.953" y="186.453" transform="matrix(0.8258 -0.5639 0.5639 0.8258 -136.6912 123.7749)" fill="#79C259" stroke="#FFFFFF" stroke-miterlimit="10" width="104.167" height="193.453"/>
+  </svg>
+
+
+    <script src="lib/d3.js"></script>
+    <script>
+      var data = [10, 40, 20, 30];
+
+      function draw() {
+        d3.selectAll('rect')
+          .data(data)
+          .transition()
+          .attr('width', function(d) { return d; });
+      }
+
+      d3.select('button').on('click', function() {
+        data = data.map(function(d) {
+          return d * 2;
+        });
+
+        draw();
+      });
+
+      draw();
+    </script>
+</body>
+</html>

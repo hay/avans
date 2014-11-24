@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <button id="knop">Hoi knop</button>
+    <script>
+        // var knop = document.getElementById('knop');
+        // knop.addEventListener('click', function() {
+        //     alert('hoi');
+        // }, false);
+
+        function aClick(element, fn) {
+            var el = document.getElementById(element);
+            el.addEventListener('click', function() {
+                fn();
+            }, false);
+        }
+
+        function hoi() {
+            alert('doei');
+        }
+
+        aClick('knop', hoi);
+    </script>
+</body>
+</html>

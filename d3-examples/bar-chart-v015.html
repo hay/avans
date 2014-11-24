@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        #chart div {
+            height: 50px;
+            background: #66f;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            color: white;
+            line-height: 50px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script src="lib/d3.js"></script>
+    <script>
+        var chart = d3.select('#chart');
+
+        function draw(labels, values) {
+            var scale = d3.scale.linear().domain([0, d3.max(values)]).range([0, 500]);
+
+            chart.selectAll("div")
+                 .data(values)
+                 .enter()
+                 .append('div')
+                 .style('width', function(d) { return scale(d) + 'px'; })
+                 .text(function(d, i) {
+                    return labels[i] + ' (' + d + ')';
+                });
+        }
+
+
+        d3.csv('v015.csv', function(err, data) {
+            console.log(JSON.stringify(data));
+
+            if (err) {
+                console.log('Oei!' + err);
+            }
+
+            var labels = [];
+            var values = [];
+
+            for (var key in data[0]) {
+                labels.push(key);
+                var val = data[0][key];
+                values.push(val);
+            }
+
+            draw(labels, values);
+        });
+    </script>
+</body>
+</html>

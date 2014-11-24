@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #chart div {
+            height: 50px;
+            background: red;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+  <button>Groter jonguh</button>
+
+  <svg width="500px" height="500px">
+     <circle opacity="0.5" fill="#6CBE45" stroke="#FFFFFF" stroke-miterlimit="10" cx="149" cy="177" r="87.333"/>
+    <circle opacity="0.5" fill="#505EAA" stroke="#FFFFFF" stroke-miterlimit="10" cx="302.333" cy="245" r="96.667"/>
+    <circle opacity="0.5" fill="#D61E3F" stroke="#FFFFFF" stroke-miterlimit="10" cx="331.666" cy="144.333" r="152.666"/>
+    <circle opacity="0.5" fill="#B5D334" stroke="#FFFFFF" stroke-miterlimit="10" cx="169" cy="371.667" r="107.333"/>
+    </svg>
+  </svg>
+
+
+    <script src="lib/d3.js"></script>
+    <script>
+      var data = [10, 40, 20, 30];
+
+      function draw() {
+        d3.selectAll('circle')
+          .data(data)
+          .transition()
+          .attr('opacity', function(d) {
+            return 1-( (1 / d) * 10);
+          })
+          .attr('r', function(d) { return d; });
+      }
+
+      d3.select('button').on('click', function() {
+        data = data.map(function(d) {
+          return d * 2;
+        });
+
+        draw();
+      });
+
+      draw();
+    </script>
+</body>
+</html>
