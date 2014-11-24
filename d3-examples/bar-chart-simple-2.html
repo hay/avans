@@ -4,6 +4,15 @@
     <meta charset="utf-8" />
     <title></title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #chart {
+            margin: 20px;
+        }
+
         #chart div {
             height: 50px;
             background: red;
@@ -20,8 +29,7 @@
 
         var scale = d3.scale.linear()
             .domain([0, d3.max(data)])
-            .range([0, window.innerWidth])
-
+            .range([0, window.innerWidth - 40])
 
         d3.select('#chart')
           .selectAll('div')

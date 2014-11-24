@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="lib/c3.css">
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script src="lib/d3.js"></script>
+    <script src="lib/c3.js"></script>
+    <script>
+        var csv = d3.dsv(';');
+
+        csv('v015.csv', function(err, data) {
+            data = data[0];
+
+            var values = d3.values(data);
+            values.unshift(['Waar heeft u uw partner ontmoet?']);
+
+            var chart = c3.generate({
+                bindto : '#chart',
+                data : {
+                    columns : [ values ],
+                    type : 'bar'
+                },
+                axis : {
+                    x : {
+                        type : 'category',
+                        categories : d3.keys(data)
+                    }
+                }
+            })
+        });
+    </script>
+</body>
+</html>

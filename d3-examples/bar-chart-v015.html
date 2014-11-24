@@ -25,6 +25,7 @@
     <script src="lib/d3.js"></script>
     <script>
         var chart = d3.select('#chart');
+        var csv = d3.dsv(';');
 
         function draw(labels, values) {
             var scale = d3.scale.linear().domain([0, d3.max(values)]).range([0, 500]);
@@ -40,7 +41,7 @@
         }
 
 
-        d3.csv('v015.csv', function(err, data) {
+        csv('v015.csv', function(err, data) {
             console.log(JSON.stringify(data));
 
             if (err) {
