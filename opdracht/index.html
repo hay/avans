@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Avans Opdracht</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Individuele Eindopracht D3</h1>
+
+    <svg id="shapes" width="800" height="250">
+        <rect x="62" y="47" fill="#01A0B0" width="156" height="156"/>
+        <circle fill="#CC333F" cx="410" cy="125" r="78"/>
+        <polygon fill="#EDC950" points="589,203 679,47 770,203 "/>
+    </svg>
+
+    <h2><em>Maak drie prototypes waarin je telkens een andere visualisatievorm kiest, met minimaal twee filtermogelijkheden.</em></h2>
+
+    <h2 class="italic">Bijvoorbeeld</h2>
+
+    <h2>Tijd die je nog hebt om deze opdracht in te leveren (19 december 2014)</h2>
+
+    <h3>Vorm: geanimeerde klok</h3>
+
+    <button id="clockdays">Dagen</button>
+    <button id="clockhours">Uren</button>
+    <button id="clockminutes">Minuten</button>
+    <button id="clockseconds">Seconden</button>
+
+    <h2 id="timeleft" class="italic"></h2>
+
+    <hr>
+
+    <h2>Aantal winkels per provincie in 2012 <small>Bron: <a href="http://www.hbd.nl/pages/15/Winkels/Dierenspeciaalzaken/Aantal-winkels-per-provincie.html?subonderwerp_id=233">HBD o.b.v. CBS en Locatus</a></small></h2>
+
+    <h3>Vorm: staafdiagram met drie datasets</h3>
+
+    <button id="animalshops">Toon Dierenwinkels</button>
+    <button id="jewelshops">Toon Juweliers</button>
+    <button id="bikeshops">Toon Fietsenwinkels</button>
+
+    <div id="shops" class="barchart"></div>
+
+    <hr>
+
+    <h2>Aantal fietsenwinkels per provincie in 2012 <small>Bron inwoners provincies: <a href="http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=37230NED&D1=17&D2=5-16&D3=154&HDR=T&STB=G1,G2&VW=T">CBS december 2013</a></small></h2>
+    <h3>Vorm: provinciekaart met dataset met absolute en relative cijfers</h3>
+
+    <div id="map1">
+        <h4>Absolute aantallen</h4>
+        <div class="map"></div>
+    </div>
+
+    <div id="map2">
+        <h4>Gecorrigeerd voor aantal inwoners</h4>
+        <div class="map"></div>
+    </div>
+
+    <br clear="all">
+    <br clear="all">
+    <hr>
+
+    <h2 class="italic">Inlevereisen</h2>
+
+    <ul>
+        <li>Je code <b>moet</b> op Github staan.</li>
+        <li>Voortbouwen op andere code <b>mag</b>, copy-pasten en een beetje aanpassen <b>niet</b>.</li>
+        <li>Je <b>moet</b> D3 gebruiken, maar je mag ook zoveel andere libraries gebruiken als je wilt.</li>
+        <li>Je code <b>moet</b> werken in Chrome en/of Firefox.</li>
+        <li>Je code <b>hoeft niet</b> te schalen naar andere schermbreedtes (responsive).</li>
+        <li>Je <b>mag</b> data hergebruiken uit het liefdeskaart project, maar dat hoeft niet.</li>
+        <li>Het is fijn als het er mooi uitziet, maar dat hoeft niet.</li>
+    </ul>
+
+    <script src="d3.js"></script>
+    <script src="shapes.js"></script>
+    <script src="shops.js"></script>
+    <script src="maps.js"></script>
+    <script src="timeleft.js"></script>
+    <script>
+        shapes();
+        shops();
+        maps();
+        timeleft();
+    </script>
+</body>
+</html>
