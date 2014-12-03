@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Bar chart met jQuery</title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                background: lightgreen;
+            }
+
+            div {
+                background: red;
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Bar chart met jQuery</h1>
+
+        <button>Toon de bar chart</button>
+
+        <ul></ul>
+
+        <script src="lib/d3.min.js"></script>
+        <script src="lib/jquery.js"></script>
+
+        <script>
+            d3.csv('prices.csv', function(d) {
+                for (var i = 0; i < d.length; i = i + 1) {
+                    var price = d[i].price;
+                    var text = '<div style="width:0;">' + price + '</div>';
+
+                    $("ul").append(text);
+                }
+
+                $("button").click(function() {
+                    $("div").each(function(i, el) {
+                        var price = d[i].price;
+                        var width = price.replace('$', '') * 3 + 'px';
+
+                        $(el).animate({
+                            'width' : width
+                        }, 1000);
+                    })
+                });
+            });
+        </script>
+    </body>
+</html>
