@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Scale example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        .box {
+            background: teal;
+            width: 0;
+            height: 55px;
+        }
+
+        .dot {
+            position: absolute;
+            top: 50px;
+            width: 30px;
+            height: 30px;
+            background: yellow;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+    <input id="widthdragger" type="range" value="10" min="1" max="100">
+
+    <div class="container">
+        <div class="box"></div>
+    </div>
+
+    <script src="lib/d3.js"></script>
+    <script>
+        var widthdragger = d3.select("#widthdragger");
+        var box = d3.select('.box');
+        var containerWidth = parseInt(d3.select('.container').style('width'));
+        var dotsdata = d3.range(0, 10);
+
+        var scaleWidth = d3.scale.linear()
+            .domain([widthdragger.attr('min'), widthdragger.attr('max')])
+            .range([0, containerWidth])
+
+        var scaleDots = d3.scale.linear().domain([d3.min(dotsdata), d3.max(dotsdata)]);
+
+        function draw() {
+            var width = scaleWidth(widthdragger.node().value);
+            box.style('width', width + 'px');
+            scaleDots.range([30, width - 60]);
+
+            box.selectAll('.dot').style('left', function(d) {
+                return scaleDots(d) + 'px';
+            });
+        }
+
+        box.selectAll('div').data(dotsdata).enter().append('div').attr('class', 'dot');
+        widthdragger.on('input', draw);
+        draw();
+    </script>
+</body>
+</html>
